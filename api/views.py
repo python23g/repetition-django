@@ -1,16 +1,17 @@
 from django.http import HttpRequest, JsonResponse
+from django.views import View
 import json
 
 
-def add(request: HttpRequest) -> JsonResponse:
-    if request.method != "POST":
-        return JsonResponse({"error": "Method not allwed"})
-    
-    body = request.body.decode()
-    data = json.loads(body)
+class AddView(View):
+    def post(self, request: HttpRequest) -> JsonResponse:
+        
+        body = request.body.decode()
+        data = json.loads(body)
 
-    result = data['operand1'] + data['operand2']
-    return JsonResponse({"result": result})
+        result = data['operand1'] + data['operand2']
+        return JsonResponse({"result": result})
+
 
 
 def subtract(request: HttpRequest) -> JsonResponse:
@@ -34,7 +35,7 @@ def divide(request: HttpRequest) -> JsonResponse:
 
     if data['operand2'] == 0:
         return JsonResponse({"error": "Division by zero is not allowed."})
-        
+
     result = data['operand1'] / data['operand2']
     return JsonResponse({"result": result})
 

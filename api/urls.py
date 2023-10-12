@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import (
-    add,
+    AddView,
     subtract,
     multiply,
     divide,
@@ -9,7 +9,7 @@ from .views import (
 )
 
 urlpatterns = [
-    path('add/', add),
+    path('add/', AddView.as_view()),
     path('subtract/', subtract),
     path('multiply/', multiply),
     path('divide/', divide),
